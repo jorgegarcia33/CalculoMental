@@ -78,13 +78,13 @@ function comprobar() {
         añadirTiempo(tiempoMas);
     } else {
         estado = "perdido";
-        document.getElementById("respuesta").style.color = "#ce2552";
+        document.getElementById("respuesta").style.color = "#dc7f89";
         document.getElementById("operacion").textContent = `${num1} ${op} ${num2} = ${solucion}`;
         clearInterval(intervalo);
         if (maxScore < score) {
             maxScore = score;
             document.getElementById("NumberMaxScore").textContent = `${maxScore}`;
-            document.getElementById("NumberMaxScore").style.color = "#FFD700";
+            document.getElementById("NumberMaxScore").style.color = "#d8807a";
         }
     }
 }
@@ -146,9 +146,10 @@ document.getElementById("respuesta").addEventListener("keydown", function (event
             comprobar();
         } else if (estado == "perdido") {
             document.getElementById("respuesta").value = "";
-            document.getElementById("respuesta").style.color = "#23B5D3";
-            document.getElementById("NumberMaxScore").style.color = "#23B5D3";
+            document.getElementById("respuesta").style.color = "#e5cc69";
+            document.getElementById("NumberMaxScore").style.color = "#e5cc69";
             document.getElementById('dif-barra').style.display = 'flex';
+            document.getElementById('modo-barra').style.display = 'flex';
             pressEnter();
         } else {
             estado = "jugando";
@@ -158,6 +159,8 @@ document.getElementById("respuesta").addEventListener("keydown", function (event
             Ronda();
             iniciarBarraTiempo();
             document.getElementById('dif-barra').style.display = 'none';
+            document.getElementById('modo-barra').style.display = 'none';
+
         }
     }
 });

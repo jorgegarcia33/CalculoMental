@@ -9,7 +9,7 @@
     width: 100vw;
     height: 100vh;
     font-family: Arial, sans-serif;
-    color: #d0d2c4;
+    color: #63949a;
   }
   
   body {
@@ -17,7 +17,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #323437;
+    background-color: #17333f;
   }
   
   #operacion{
@@ -35,7 +35,7 @@
     font-size: 70px;
     text-align: center;
     font-weight: bold;
-    color:#23B5D3;
+    color:#e5cc69;
     caret-color: transparent;
     
   }
@@ -54,18 +54,18 @@
   }
   #MaxScore{
     position: absolute;
-    top: 10px;
-    right: 20px;
+    bottom: 10px;
+    left: 20px;
     font-size: 20px;
     font-weight: bold;
   }
   #NumberScore{
     font-size: 60px;
-    color: #23B5D3;
+    color: #e5cc69;
   }
   #NumberMaxScore{
     font-size: 60px;
-    color: #23B5D3;
+    color: #e5cc69;
   }
   #barra-contenedor {
     width: 300px;
@@ -86,24 +86,24 @@
 
   #dif-barra {
     position: absolute;
-    top: 70px;
+    top: 75px;
     display: flex;
     gap: 10px;
     padding: 3px;
-    border: 3px solid #23B5D3;
+    border: 3px solid #496c72;
     border-radius: 10px;
-    background-color: red;
+    background-color: #496c72;
     
 }
 #modo-barra {
   position: absolute;
-  top: 10px;
+  top: 15px;
   display: flex;
   gap: 10px;
   padding: 3px;
-  border: 3px solid #23B5D3;
+  border: 3px solid #496c72;
   border-radius: 10px;
-  background-color: red;
+  background-color: #496c72;
   
 }
 
@@ -112,19 +112,19 @@
     font-size: 1rem;
     font-weight: bold;
     color: #323437;
-    background-color: #d0d2c4;
-    border: 3px solid #23B5D3;
+    background-color: #496c72;
+    border: 3px;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
-.dificultad-btn:hover, .modo-btn:hover {
-    background-color: #c0c2b2;
+.dificultad-btn.selected, .modo-btn.selected {
+  color: #e5cc69;
 }
 
-.dificultad-btn.selected, .modo -btn.selected {
-    background-color: #23B5D3;
-    color: #ffffff;
-    border-color: #ffffff;
+.dificultad-btn:hover, .modo-btn:hover {
+    color: white;
 }
+
+

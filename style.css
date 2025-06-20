@@ -118,13 +118,11 @@
     cursor: pointer;
     transition: all 0.2s ease;
 }
-
 .dificultad-btn.selected, .modo-btn.selected {
   color: #e5cc69;
 }
 .dificultad-btn:hover, .modo-btn:hover {
     color: white;
 }
-
 
 

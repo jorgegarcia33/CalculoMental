@@ -199,6 +199,15 @@ dificultadBtns.forEach(btn => {
         document.getElementById("respuesta").focus();
     });
 });
+document.body.addEventListener('touchstart', () => {
+    if (estado !== "jugando") {
+        document.getElementById("respuesta").focus();
+        empezar();
+    }
+    else{
+        document.getElementById("respuesta").focus();
+    }
+});
 document.body.addEventListener('click', () => {
     if (estado !== "jugando") {
         document.getElementById("respuesta").focus();

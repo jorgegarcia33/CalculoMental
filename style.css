@@ -26,19 +26,19 @@
     
   }
 
-  #respuesta{
-    all: unset;
+  #respuesta {
     width: 100vw;
     height: 70px;
-    border: none;
-    background-color: transparent;
     font-size: 70px;
     text-align: center;
     font-weight: bold;
-    color:#e5cc69;
-    caret-color: transparent;
-    
-  }
+    color: #e5cc69;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    caret-color: #e5cc69; /* muestra el cursor */
+}
+
   input[type=number]::-webkit-inner-spin-button, 
   input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none; 

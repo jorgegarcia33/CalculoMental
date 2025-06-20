@@ -1,11 +1,14 @@
 let num1, num2, solucion, score, maxScore = 0, estado, op;
-let dificultad,maxSuma,maxMult, tiempoMas;
-const operaciones = ["+", "+", "+", "-", "-", "-", "×", "/"];
+let maxSuma,maxMult, tiempoMas;
+const operacionesFacil = ["+","-"];
+const operacionesMedio = ["+","-","+","-","×"];
+const operacionesDificil = ["+", "+", "+", "-", "-", "-", "×", "/"];
+let operaciones;
 
 let tiempoMax;
 let tiempoRestante = tiempoMax;
 let intervalo;
-
+let dificultadActual;
 
 function iniciarBarraTiempo() {
     tiempoRestante = tiempoMax;
@@ -60,7 +63,7 @@ function pressEnter() {
 
 function Ronda() {
     document.getElementById("respuesta").value = "";
-    elegirOperando();
+    ElegirOp();
     elegirNumeros();
     document.getElementById("operacion").textContent = ` ${num1} ${op} ${num2}`;
 }
@@ -86,8 +89,32 @@ function comprobar() {
     }
 }
 
-function elegirOperando() {
+function ElegirOp() {
     op = operaciones[Math.floor(Math.random() * operaciones.length)];
+}
+
+function selectorDif(){
+    if(dificultadActual=="facil"){
+        maxSuma=20;
+        maxMult=8;
+        tiempoMas=3;
+        tiempoMax=30;
+        operaciones=operacionesFacil;
+    }
+    else if(dificultadActual=="medio"){
+        maxSuma=50;
+        maxMult=10;
+        tiempoMas=2;
+        tiempoMax=20;
+        operaciones=operacionesMedio;
+    }
+    else if(dificultadActual=="dificil"){
+        maxSuma=100;
+        maxMult=20;
+        tiempoMas=2;
+        tiempoMax=20;
+        operaciones=operacionesDificil;
+    }
 }
 
 function elegirNumeros() {
@@ -102,35 +129,14 @@ function elegirNumeros() {
         solucion = num1 - num2;
     }
     if (op == "×") {
-        num1 = Math.floor(Math.random() * maxMult) + 2;
-        num2 = Math.floor(Math.random() * maxMult) + 2;
+        num1 = Math.floor(Math.random() * maxMult) + 1;
+        num2 = Math.floor(Math.random() * maxMult) + 1;
         solucion = num1 * num2;
     }
     if (op == "/") {
-        num2 = Math.floor(Math.random() * maxMult) + 2;
+        num2 = Math.floor(Math.random() * maxMult) + 1  ;
         solucion = Math.floor(Math.random() * maxMult) + 1;
         num1 = num2 * solucion;
-    }
-}
-function NumerosDificultad(){
-    dificultad = document.getElementById("dificultad").value;
-    if(dificultad=="facil"){
-        maxSuma=10;
-        maxMult=8;
-        tiempoMas=2;
-        tiempoMax=20;
-    }
-    if(dificultad=="medio"){
-        maxSuma=20;
-        maxMult=12;
-        tiempoMas=1;
-        tiempoMax=15;
-    }
-    if(dificultad=="dificil"){
-        maxSuma=30;
-        maxMult=15;
-        tiempoMas=1;
-        tiempoMax=10;
     }
 }
 
@@ -142,16 +148,52 @@ document.getElementById("respuesta").addEventListener("keydown", function (event
             document.getElementById("respuesta").value = "";
             document.getElementById("respuesta").style.color = "#23B5D3";
             document.getElementById("NumberMaxScore").style.color = "#23B5D3";
+            document.getElementById('dif-barra').style.display = 'flex';
             pressEnter();
         } else {
             estado = "jugando";
             score = 0;
             document.getElementById("NumberScore").textContent = `${score}`;
-            NumerosDificultad();
+            selectorDif();
             Ronda();
             iniciarBarraTiempo();
+            document.getElementById('dif-barra').style.display = 'none';
         }
     }
 });
+
+const modoBtns = document.querySelectorAll('.modo-btn');
+let modoActual = 'infinito'; // Valor por defecto
+
+modoBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        modoBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        modoActual = btn.dataset.modo;
+        if(modoActual=='racha'){
+            document.getElementById('dif-barra').style.display = 'none';
+        }
+        else if(modoActual=='infinito'){
+            document.getElementById('dif-barra').style.display = 'flex';
+        }
+        document.getElementById("respuesta").focus();
+    });
+});
+
+
+
+// Asignar comportamiento a los botones de dificultad
+const dificultadBtns = document.querySelectorAll('.dificultad-btn');
+dificultadActual = 'medio'; // Valor por defecto
+
+dificultadBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        dificultadBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        dificultadActual = btn.dataset.dificultad;
+        document.getElementById("respuesta").focus();
+    });
+});
+
 
 window.onload = pressEnter;

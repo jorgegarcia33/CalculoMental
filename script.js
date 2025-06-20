@@ -55,11 +55,14 @@ function pressEnter() {
     document.getElementById("respuesta").value = "";
     estado = "esperando";
     document.getElementById("respuesta").focus();
-    document.getElementById("operacion").textContent = "Press Enter to Play";
+
+    selectorDif();
+    Ronda();
 
     tiempoRestante = tiempoMax;
     actualizarBarra();
 }
+
 
 function Ronda() {
     document.getElementById("respuesta").value = "";
@@ -139,28 +142,35 @@ function elegirNumeros() {
         num1 = num2 * solucion;
     }
 }
-function empezar(){
-    if (estado == "jugando") {
+function empezar() {
+    const respuestaUsuario = parseInt(document.getElementById("respuesta").value);
+
+    if (estado === "jugando") {
         comprobar();
-    } else if (estado == "perdido") {
+    } else if (estado === "perdido") {
         document.getElementById("respuesta").value = "";
         document.getElementById("respuesta").style.color = "#e5cc69";
         document.getElementById("NumberMaxScore").style.color = "#e5cc69";
         document.getElementById('dif-barra').style.display = 'flex';
         document.getElementById('modo-barra').style.display = 'flex';
         pressEnter();
-    } else {
-        estado = "jugando";
-        score = 0;
-        document.getElementById("NumberScore").textContent = `${score}`;
-        selectorDif();
-        Ronda();
-        iniciarBarraTiempo();
-        document.getElementById('dif-barra').style.display = 'none';
-        document.getElementById('modo-barra').style.display = 'none';
-
+    } else if (estado === "esperando") {
+        const respuestaUsuario = parseInt(document.getElementById("respuesta").value);
+        if (respuestaUsuario === solucion) {
+            estado = "jugando";
+            score = 1;
+            document.getElementById("NumberScore").textContent = `${score}`;
+            iniciarBarraTiempo();
+            Ronda();
+            document.getElementById("respuesta").style.color = "#e5cc69";
+            document.getElementById('dif-barra').style.display = 'none';
+            document.getElementById('modo-barra').style.display = 'none';
+        } else {
+            document.getElementById("respuesta").style.color = "#dc7f89";
+        }
     }
 }
+
 
 document.getElementById("respuesta").addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
@@ -169,7 +179,7 @@ document.getElementById("respuesta").addEventListener("keydown", function (event
 });
 
 const modoBtns = document.querySelectorAll('.modo-btn');
-let modoActual = 'infinito'; // Valor por defecto
+let modoActual = 'infinito';
 
 modoBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -196,28 +206,20 @@ dificultadBtns.forEach(btn => {
         dificultadBtns.forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         dificultadActual = btn.dataset.dificultad;
+        selectorDif();
+        estado = "esperando";
+        Ronda();
+        tiempoRestante = tiempoMax;
+        actualizarBarra();
+        document.getElementById("respuesta").value = "";
+        document.getElementById("respuesta").style.color = "#e5cc69";
         document.getElementById("respuesta").focus();
     });
 });
-document.body.addEventListener('touchstart', () => {
-    if (estado !== "jugando") {
-        document.getElementById("respuesta").focus();
-        empezar();
-    }
-    else{
-        document.getElementById("respuesta").focus();
-    }
-});
-document.body.addEventListener('click', () => {
-    if (estado !== "jugando") {
-        document.getElementById("respuesta").focus();
-        empezar();
-    }
-    else{
-        document.getElementById("respuesta").focus();
-    }
-});
 
 
 
-window.onload = pressEnter;
+
+window.onload = () => {
+    pressEnter();
+};

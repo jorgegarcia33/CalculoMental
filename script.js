@@ -139,29 +139,32 @@ function elegirNumeros() {
         num1 = num2 * solucion;
     }
 }
+function empezar(){
+    if (estado == "jugando") {
+        comprobar();
+    } else if (estado == "perdido") {
+        document.getElementById("respuesta").value = "";
+        document.getElementById("respuesta").style.color = "#e5cc69";
+        document.getElementById("NumberMaxScore").style.color = "#e5cc69";
+        document.getElementById('dif-barra').style.display = 'flex';
+        document.getElementById('modo-barra').style.display = 'flex';
+        pressEnter();
+    } else {
+        estado = "jugando";
+        score = 0;
+        document.getElementById("NumberScore").textContent = `${score}`;
+        selectorDif();
+        Ronda();
+        iniciarBarraTiempo();
+        document.getElementById('dif-barra').style.display = 'none';
+        document.getElementById('modo-barra').style.display = 'none';
+
+    }
+}
 
 document.getElementById("respuesta").addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
-        if (estado == "jugando") {
-            comprobar();
-        } else if (estado == "perdido") {
-            document.getElementById("respuesta").value = "";
-            document.getElementById("respuesta").style.color = "#e5cc69";
-            document.getElementById("NumberMaxScore").style.color = "#e5cc69";
-            document.getElementById('dif-barra').style.display = 'flex';
-            document.getElementById('modo-barra').style.display = 'flex';
-            pressEnter();
-        } else {
-            estado = "jugando";
-            score = 0;
-            document.getElementById("NumberScore").textContent = `${score}`;
-            selectorDif();
-            Ronda();
-            iniciarBarraTiempo();
-            document.getElementById('dif-barra').style.display = 'none';
-            document.getElementById('modo-barra').style.display = 'none';
-
-        }
+        empezar ();
     }
 });
 
@@ -185,9 +188,8 @@ modoBtns.forEach(btn => {
 
 
 
-// Asignar comportamiento a los botones de dificultad
 const dificultadBtns = document.querySelectorAll('.dificultad-btn');
-dificultadActual = 'medio'; // Valor por defecto
+dificultadActual = 'medio';
 
 dificultadBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -197,10 +199,16 @@ dificultadBtns.forEach(btn => {
         document.getElementById("respuesta").focus();
     });
 });
-document.getElementById('boton-inicio').addEventListener('click', () => {
-    document.getElementById('boton-inicio').style.display = 'none';
-    document.getElementById("respuesta").focus();
+document.body.addEventListener('click', () => {
+    if (estado !== "jugando") {
+        document.getElementById("respuesta").focus();
+        empezar();
+    }
+    else{
+        document.getElementById("respuesta").focus();
+    }
 });
+
 
 
 window.onload = pressEnter;

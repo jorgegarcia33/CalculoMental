@@ -125,24 +125,6 @@
 .dificultad-btn:hover, .modo-btn:hover {
     color: white;
 }
-#boton-inicio {
-  display: none;
-  position: absolute;
-  bottom: 100px;
-  padding: 20px 40px;
-  font-size: 20px;
-  font-weight: bold;
-  background-color: #e5cc69;
-  color: #17333f;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
 
-@media (max-width: 768px) {
-  #boton-inicio {
-      display: block;
-  }
-}
 
 

@@ -26,19 +26,19 @@
     
   }
 
-  #respuesta {
+  #respuesta{
+    all: unset;
     width: 100vw;
     height: 70px;
+    border: none;
+    background-color: transparent;
     font-size: 70px;
     text-align: center;
     font-weight: bold;
-    color: #e5cc69;
-    border: none;
-    background-color: transparent;
-    outline: none;
-    caret-color: #e5cc69; /* muestra el cursor */
-}
-
+    color:#e5cc69;
+    caret-color: transparent;
+    
+  }
   input[type=number]::-webkit-inner-spin-button, 
   input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none; 
@@ -122,9 +122,27 @@
 .dificultad-btn.selected, .modo-btn.selected {
   color: #e5cc69;
 }
-
 .dificultad-btn:hover, .modo-btn:hover {
     color: white;
+}
+#boton-inicio {
+  display: none;
+  position: absolute;
+  bottom: 100px;
+  padding: 20px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #e5cc69;
+  color: #17333f;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  #boton-inicio {
+      display: block;
+  }
 }
 
 

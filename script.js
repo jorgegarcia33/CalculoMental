@@ -197,6 +197,10 @@ dificultadBtns.forEach(btn => {
         document.getElementById("respuesta").focus();
     });
 });
+document.getElementById('boton-inicio').addEventListener('click', () => {
+    document.getElementById('boton-inicio').style.display = 'none';
+    document.getElementById("respuesta").focus();
+});
 
 
 window.onload = pressEnter;
